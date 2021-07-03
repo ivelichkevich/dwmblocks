@@ -1,2 +1,2 @@
 #!/bin/sh
-echo "$(date '+%a, %d %b')"
+echo -e "$(date '+%a,%d,%b')"

@@ -1,5 +1,5 @@
-#PREFIX := /usr/local
-PREFIX := ${HOME}/.local
+PREFIX := /usr/local
+#PREFIX := ${HOME}/.local
 
 CC := gcc
 CFLAGS := -O3 -Wall -Wextra
@@ -26,8 +26,14 @@ install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	install -m 0755 dwmblocks ${DESTDIR}${PREFIX}/bin/dwmblocks
 	install -m 0755 sigdwmblocks ${DESTDIR}${PREFIX}/bin/sigdwmblocks
+	install -m 0755 daemons/pulse_daemon.sh ${DESTDIR}${PREFIX}/bin/pulse_daemon.sh
+	cp daemons/pulse_daemon.service /usr/lib/systemd/user/
+	# exec manualy from user: "systemctl --user enable pulse_daemon"
 
 uninstall:
-	rm -f ${DESTDIR}${PREFIX}/bin/dwmblocks ${DESTDIR}${PREFIX}/bin/sigdwmblocks
+	systemctl --user disable pulse_daemon
+	systemctl --user stop pulse_daemon
+	rm -f /usr/lib/systemd/user/pulse_daemon.service
+	rm -f ${DESTDIR}${PREFIX}/bin/dwmblocks ${DESTDIR}${PREFIX}/bin/sigdwmblocks ${DESTDIR}${PREFIX}/bin/pulse_daemon.sh
 
 .PHONY: all clean install uninstall

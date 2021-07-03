@@ -50,6 +50,8 @@ Clone the repository and run `make install clean` after getting in the project
 directory. By default the program is installed in `$HOME/.local/bin`
 (see [GNUmakefile](GNUmakefile)). If xgetrootname is required run
 `make xgetrootname`.
+run manually
+systemctl --user enable pulse_daemon
 
 # Acknowledgements
 

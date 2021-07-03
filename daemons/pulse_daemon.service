@@ -1,0 +1,8 @@
+[Unit]
+After=pulseaudio.service
+
+[Service]
+ExecStart=/usr/local/bin/pulse_daemon.sh
+
+[Install]
+WantedBy=default.target
